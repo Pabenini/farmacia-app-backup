@@ -11,17 +11,17 @@ export default function Index() {
       }}
     >
       <Image
-      style={{
-        borderColor: "green", 
-        borderWidth: 2,
-        borderRadius: 300,
-        borderStyle: 'solid',
-        width: 300,
-        height: 300,
-        marginBottom: 70,
-      }} 
-      source={require('../assets/images/Farmacia-logo.png')}
+      source={require('../assets/images/Farmacia-logo2.png')}
       />
+      <Text
+      style={{
+        fontWeight: 'bold',
+        fontSize: 40,
+        fontFamily: "arial",
+        marginBottom: 100,
+      }}>
+        pharmacy
+      </Text>
       <Link href="/bla" style={styles.button} asChild>
         <TouchableOpacity>
           <Text style={styles.buttonText}>
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 15,
+    borderRadius: 30,
   },
   buttonText: {
     fontSize: 20,

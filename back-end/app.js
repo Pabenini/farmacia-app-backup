@@ -84,3 +84,23 @@ app.delete('/cursos/:index', (req, res) => {
 app.listen(port, () => { 
     console.log('Servidor Iniciado na porta'); 
 }); //Inicia o servidor na porta definida.
+
+//Requisição com axios
+
+const path = require('path'); //Configuração para acessar o arquivo products.json
+const axios = require('axios');
+//Servindo arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public'))); ///Configuração para acessar o arquivo
+
+//npm install axios
+//crie a const axios na parte de cima -> const axios = require('axios');
+//http://localhost:4000/produtos
+app.get("/produtos", function (req, res) {
+    axios.get('http://localhost:4000/products.json')
+        .then(response => {
+            res.json(response.data);
+        })
+        .catch(error => {
+            res.status(500).send('Erro ao ler o arquivo');
+        });
+});
