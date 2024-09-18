@@ -1,6 +1,34 @@
 const express = require('express'); //Importa o módulo express.
 const app = express(); //Cria uma instância do express.
 const port = 4000; //Define a porta que o servidor irá escutar.
+/* Instalação do cors para permitir acesso a api -
+CORS (Cross-Origin Resource Sharing):
+permitir solicitações cross-origin. Adicionando cabeçalhos CORS à resposta do servidor.
+No Node.js pode usar o pacote cors para configurar
+    npm install --save cors
+*/
+var cors = require('cors')
+/*
+ * Configuração do middleware Express.js para habilitar o CORS (Cross-Origin Resource Sharing)
+ * em uma aplicação Node.js 
+ */
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
+    app.use(cors());
+    next();
+});
+//Conexão com o cadastro.js
+const cadastro = require('./models/cadastro.js');
+const remedios = require('./models/remedios.js');
+
+//A linha abaixo permitirá requisições do body para o POST
+app.use(express.json());
+
+/*
+ROTAS COM BANCO DE DADOS
+*/
 
 //http://localhost:4000
 app.get('/', (req, res) => { 
