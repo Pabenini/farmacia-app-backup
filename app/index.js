@@ -22,7 +22,7 @@ export default function Index() {
       }}>
         pharmacy
       </Text>
-      <Link href="/bla" style={styles.button} asChild>
+      <Link href="/products" style={styles.button} asChild>
         <TouchableOpacity>
           <Text style={styles.buttonText}>
             Entrar

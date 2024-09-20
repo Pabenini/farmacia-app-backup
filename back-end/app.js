@@ -20,8 +20,8 @@ app.use((req, res, next) => {
     next();
 });
 //Conexão com o cadastro.js
-const cadastro = require('./models/cadastro.js');
-const remedios = require('./models/remedios.js');
+// const cadastro = require('./models/cadastro.js');
+// const remedio = require('./models/remedios.js');
 
 //A linha abaixo permitirá requisições do body para o POST
 app.use(express.json());
@@ -109,21 +109,18 @@ app.delete('/cursos/:index', (req, res) => {
 });
 
 
-app.listen(port, () => { 
-    console.log('Servidor Iniciado na porta'); 
-}); //Inicia o servidor na porta definida.
-
 //Requisição com axios
 
 const path = require('path'); //Configuração para acessar o arquivo products.json
 const axios = require('axios');
+const { sourceMapsEnabled } = require('process');
 //Servindo arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public'))); ///Configuração para acessar o arquivo
 
 //npm install axios
 //crie a const axios na parte de cima -> const axios = require('axios');
 //http://localhost:4000/produtos
-app.get("/produtos", function (req, res) {
+app.get("/products", function (req, res) {
     axios.get('http://localhost:4000/products.json')
         .then(response => {
             res.json(response.data);
@@ -132,3 +129,22 @@ app.get("/produtos", function (req, res) {
             res.status(500).send('Erro ao ler o arquivo');
         });
 });
+
+app.get("/products/:id", function (req, res) {
+  axios.get('http://localhost:'+port+'/products.json')
+    .then(response => {
+        const listProduct = response.data.listProduct;
+        const id = req.params.id;
+        const product = listProduct.find(product => product.id == id);
+        res.json(product);
+    })
+    .catch(error => {
+        res.status(500).send('Erro ao ler o arquivo');
+    });
+});
+
+
+
+app.listen(port, () => { 
+    console.log('Servidor Iniciado na porta'); 
+}); //Inicia o servidor na porta definida.
