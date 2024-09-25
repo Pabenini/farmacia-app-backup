@@ -1,5 +1,7 @@
 import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Link } from "expo-router";
+import { API_URL } from './config';
+import { useEffect, useState } from "react";
 import React from "react";
 import list from "./products.json"
 
